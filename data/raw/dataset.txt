@@ -1,0 +1,113 @@
+================================================================================
+ARCHIVO: articles.csv
+================================================================================
+Número de filas: 105,542
+
+CABECERAS:
+  0: article_id
+  1: product_code
+  2: prod_name
+  3: product_type_no
+  4: product_type_name
+  5: product_group_name
+  6: graphical_appearance_no
+  7: graphical_appearance_name
+  8: colour_group_code
+  9: colour_group_name
+  10: perceived_colour_value_id
+  11: perceived_colour_value_name
+  12: perceived_colour_master_id
+  13: perceived_colour_master_name
+  14: department_no
+  15: department_name
+  16: index_code
+  17: index_name
+  18: index_group_no
+  19: index_group_name
+  20: section_no
+  21: section_name
+  22: garment_group_no
+  23: garment_group_name
+  24: detail_desc
+
+PRIMERA FILA:
+  article_id: 0108775015
+  product_code: 0108775
+  prod_name: Strap top
+  product_type_no: 253
+  product_type_name: Vest top
+  product_group_name: Garment Upper body
+  graphical_appearance_no: 1010016
+  graphical_appearance_name: Solid
+  colour_group_code: 09
+  colour_group_name: Black
+  perceived_colour_value_id: 4
+  perceived_colour_value_name: Dark
+  perceived_colour_master_id: 5
+  perceived_colour_master_name: Black
+  department_no: 1676
+  department_name: Jersey Basic
+  index_code: A
+  index_name: Ladieswear
+  index_group_no: 1
+  index_group_name: Ladieswear
+  section_no: 16
+  section_name: Womens Everyday Basics
+  garment_group_no: 1002
+  garment_group_name: Jersey Basic
+  detail_desc: Jersey top with narrow shoulder straps.
+
+================================================================================
+ARCHIVO: customers.csv
+================================================================================
+Número de filas: 1,371,980
+
+CABECERAS:
+  0: customer_id
+  1: FN
+  2: Active
+  3: club_member_status
+  4: fashion_news_frequency
+  5: age
+  6: postal_code
+
+PRIMERA FILA:
+  customer_id: 00000dbacae5abe5e23885899a1fa44253a17956c6d1c3d25f88aa139fdfc657
+  FN: 
+  Active: 
+  club_member_status: ACTIVE
+  fashion_news_frequency: NONE
+  age: 49
+  postal_code: 52043ee2162cf5aa7ee79974281641c6f11a68d276429a91f8ca0d4b6efa8100
+
+================================================================================
+ARCHIVO: transactions_train.csv
+================================================================================
+Número de filas: 31,788,324
+
+CABECERAS:
+  0: t_dat
+  1: customer_id
+  2: article_id
+  3: price
+  4: sales_channel_id
+
+PRIMERA FILA:
+  t_dat: 2018-09-20
+  customer_id: 000058a12d5b43e67d225668fa1f8d618c13dc232df0cad8ffe7ad4a1091e318
+  article_id: 0663713001
+  price: 0.050830508474576264
+  sales_channel_id: 2
+
+================================================================================
+ARCHIVO: sample_submission.csv
+================================================================================
+Número de filas: 1,371,980
+
+CABECERAS:
+  0: customer_id
+  1: prediction
+
+PRIMERA FILA:
+  customer_id: 00000dbacae5abe5e23885899a1fa44253a17956c6d1c3d25f88aa139fdfc657
+  prediction: 0706016001 0706016002 0372860001 0610776002 0759871002 0464297007 0372860002 0610776001 0399223001 0706016003 0720125001 0156231001
