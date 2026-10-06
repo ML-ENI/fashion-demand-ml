@@ -1,0 +1,5 @@
+# Source datasets are downloaded separately and must not be committed.
+data/raw/*.csv
+
+# Generated datasets can be recreated from the pipeline.
+data/processed/
