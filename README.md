@@ -132,6 +132,16 @@ Relevant experiments should record:
 - random seed,
 - evaluation metrics.
 
+Generate the processed article-week dataset with:
+
+```bash
+python src/data/process_data.py
+```
+
+The output is a gzip-compressed sparse weekly panel with calendar-correct lags,
+rolling demand features and next-week demand. Run with `--help` for test and
+path options.
+
 ## Reports
 
 The same project is documented from two perspectives:
