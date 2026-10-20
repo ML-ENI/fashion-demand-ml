@@ -9,3 +9,4 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 *.antes_revision_*.ipynb
+graphify-out/
