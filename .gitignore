@@ -3,3 +3,9 @@ data/raw/*.csv
 
 # Generated datasets can be recreated from the pipeline.
 data/processed/
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+*.antes_revision_*.ipynb
