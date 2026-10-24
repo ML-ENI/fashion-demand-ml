@@ -26,7 +26,7 @@ Esta es la fuente de verdad para cualquier gráfico del proyecto `fashion-demand
 
 ## 3. Color
 
-Paleta principal, en este orden:
+Colores semánticos:
 
 | Uso | Color |
 |---|---|
@@ -36,10 +36,27 @@ Paleta principal, en este orden:
 | Dorado | `#E9A23B` |
 | Violeta | `#7357C8` |
 
+Paleta categórica extendida, optimizada para maximizar la distancia perceptual entre colores sobre el fondo del proyecto:
+
+| Orden | Color | Orden | Color |
+|---:|---|---:|---|
+| 1 | `#2F6BFF` | 11 | `#AA0033` |
+| 2 | `#00AA00` | 12 | `#999900` |
+| 3 | `#FF0011` | 13 | `#0055AA` |
+| 4 | `#FF00AA` | 14 | `#CC7777` |
+| 5 | `#775522` | 15 | `#336600` |
+| 6 | `#0099CC` | 16 | `#CC66DD` |
+| 7 | `#884477` | 17 | `#993300` |
+| 8 | `#008866` | 18 | `#9988CC` |
+| 9 | `#DD7700` | 19 | `#FF2277` |
+| 10 | `#AA11DD` | 20 | `#889955` |
+
 - El color siempre representa una variable o resalta un hallazgo; nunca es decoración.
 - Positivo: verde azulado. Negativo: coral. Referencia o baseline: gris.
+- En comparaciones categóricas se usa la paleta extendida en el orden indicado y se asignan hasta veinte colores antes de repetirlos.
+- Los significados semánticos de positivo, negativo y referencia prevalecen sobre el orden categórico.
 - Se mantiene el mismo color para la misma categoría dentro de una figura.
-- No se usan arcoíris, degradados arbitrarios ni gráficos 3D.
+- No se usan escalas arcoíris para variables continuas, degradados arbitrarios ni gráficos 3D.
 - La información importante no puede depender únicamente del color.
 
 ## 4. Títulos, ejes, fechas y números
