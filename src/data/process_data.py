@@ -32,6 +32,8 @@ def parse_args():
     parser.add_argument("--train-fraction", type=float, default=0.70)
     parser.add_argument("--validation-fraction", type=float, default=0.15)
     parser.add_argument("--test-fraction", type=float, default=0.15)
+    parser.add_argument("--high-demand-quantile", type=float, default=0.75,
+                        help="Cuantil de ventas positivas de train que define demanda alta")
     parser.add_argument("--gap-weeks", type=int, default=0,
                         help="Semanas objetivo excluidas antes de cada corte; 0 para evaluación semanal")
     parser.add_argument("--parquet", action="store_true", help="Añade Parquet; requiere pyarrow")
@@ -143,28 +145,110 @@ def add_temporal_features(weekly, complete_weeks, history_weeks=12):
                 if w + pd.Timedelta(weeks=1) in complete
                 and all(w - pd.Timedelta(weeks=i) in complete for i in range(1, history_weeks + 1))}
     result = weekly.loc[weekly["week"].isin(eligible)].copy()
-    lookup = weekly.set_index(["week", "article_id"])["sales"]
+    lookup = weekly.set_index(["week", "article_id"])
     if lookup.index.duplicated().any():
         raise ValueError("Hay parejas artículo-semana duplicadas")
-    def sales_at(offset):
+    def value_at(column, offset, fill_value=None, dtype=None):
         keys = pd.MultiIndex.from_arrays([
             result["week"] + pd.Timedelta(weeks=offset), result["article_id"]
         ], names=["week", "article_id"])
-        # Solo rellenamos con cero en semanas cuya cobertura está comprobada.
-        return lookup.reindex(keys).fillna(0).to_numpy(dtype="int64")
+        values = lookup[column].reindex(keys)
+        if fill_value is not None:
+            values = values.fillna(fill_value)
+        return values.to_numpy(dtype=dtype)
+
+    # Solo rellenamos ventas con cero en semanas cuya cobertura está comprobada.
     for lag in range(1, history_weeks + 1):
-        result[f"lag_{lag}_sales"] = sales_at(-lag)
-    result["target_next_week_sales"] = sales_at(1)
+        result[f"lag_{lag}_sales"] = value_at("sales", -lag, fill_value=0, dtype="int64")
+    result["target_next_week_sales"] = value_at("sales", 1, fill_value=0, dtype="int64")
     result["target_week"] = result["week"] + pd.Timedelta(weeks=1)
     result["target_is_observed"] = True
     result["history_is_observed"] = True
     for window in [4, 12]:
-        result[f"rolling_{window}w_sales_mean"] = result[[f"lag_{i}_sales" for i in range(1, window + 1)]].mean(axis=1)
+        lag_columns = [f"lag_{i}_sales" for i in range(1, window + 1)]
+        result[f"rolling_{window}w_sales_mean"] = result[lag_columns].mean(axis=1)
+        result[f"rolling_{window}w_sales_std"] = result[lag_columns].std(axis=1, ddof=0)
+        result[f"rolling_{window}w_active_weeks"] = result[lag_columns].gt(0).sum(axis=1).astype("int8")
+
+    result["sales_trend_4w"] = (
+        result[["lag_1_sales", "lag_2_sales"]].mean(axis=1)
+        - result[["lag_3_sales", "lag_4_sales"]].mean(axis=1)
+    )
+    historical_prices = []
+    historical_online_sales = []
+    for lag in range(1, 5):
+        price_column = f"lag_{lag}_mean_price"
+        result[price_column] = value_at("mean_price", -lag)
+        historical_prices.append(price_column)
+        historical_online_sales.append(
+            value_at("online_sales", -lag, fill_value=0, dtype="int64")
+        )
+    result["rolling_4w_mean_price"] = result[historical_prices].mean(axis=1)
+    result["price_change_from_4w_mean"] = result["mean_price"] - result["rolling_4w_mean_price"]
+    prior_sales = result[[f"lag_{lag}_sales" for lag in range(1, 5)]].sum(axis=1).to_numpy()
+    prior_online_sales = np.vstack(historical_online_sales).sum(axis=0)
+    result["rolling_4w_online_share"] = np.divide(
+        prior_online_sales, prior_sales,
+        out=np.full(len(result), np.nan, dtype="float64"), where=prior_sales > 0)
     # Los dos componentes usan el mismo calendario ISO.
     calendar = result["week"].dt.isocalendar()
     result["iso_year"] = calendar.year.astype("int16")
     result["iso_week"] = calendar.week.astype("int16")
     return result
+
+
+def add_classification_target(data, quantile=0.75):
+    """Define demanda alta con ventas positivas de train y fija el umbral."""
+    if not 0 < quantile < 1:
+        raise ValueError("high-demand-quantile debe estar entre 0 y 1")
+    train = data.loc[data["split"].eq("train"), "target_next_week_sales"]
+    positive_train = train[train.gt(0)]
+    if positive_train.empty:
+        raise ValueError("No hay ventas positivas en train para definir demanda alta")
+    threshold = int(max(1, positive_train.quantile(quantile, interpolation="higher")))
+    result = data.copy()
+    result["target_high_demand"] = result["target_next_week_sales"].ge(threshold).astype("int8")
+    prevalence = result.groupby("split")["target_high_demand"].mean()
+    details = {
+        "definition": "target_next_week_sales >= threshold",
+        "threshold_units": threshold,
+        "training_quantile": float(quantile),
+        "reference_population": "positive target_next_week_sales rows in train only",
+        "prevalence_by_split": {str(k): float(v) for k, v in prevalence.items()},
+    }
+    return result, details
+
+
+def build_clustering_table(data):
+    """Resume artículos con señales históricas de train, sin objetivos futuros."""
+    train = data.loc[data["split"].eq("train")].copy()
+    if train.empty:
+        raise ValueError("Train está vacío; no se puede construir clustering")
+    grouped = train.groupby("article_id", sort=True)
+    clusters = grouped.agg(
+        observation_start=("week", "min"),
+        observation_end=("week", "max"),
+        article_weeks=("week", "size"),
+        mean_current_week_sales=("sales", "mean"),
+        median_current_week_sales=("sales", "median"),
+        std_current_week_sales=("sales", "std"),
+        max_current_week_sales=("sales", "max"),
+        mean_12w_sales=("rolling_12w_sales_mean", "mean"),
+        mean_12w_sales_volatility=("rolling_12w_sales_std", "mean"),
+        mean_sales_trend_4w=("sales_trend_4w", "mean"),
+        mean_active_weeks_12w=("rolling_12w_active_weeks", "mean"),
+        mean_price=("mean_price", "mean"),
+        price_std=("mean_price", "std"),
+        total_sales=("sales", "sum"),
+        total_online_sales=("online_sales", "sum"),
+    ).reset_index()
+    clusters["std_current_week_sales"] = clusters["std_current_week_sales"].fillna(0)
+    clusters["price_std"] = clusters["price_std"].fillna(0)
+    clusters["historical_active_share"] = clusters.pop("mean_active_weeks_12w") / 12
+    clusters["mean_online_share"] = clusters.pop("total_online_sales") / clusters.pop("total_sales")
+    metadata_columns = ARTICLE_COLUMNS[1:]
+    metadata = grouped[metadata_columns].first().reset_index()
+    return clusters.merge(metadata, on="article_id", how="left", validate="one_to_one")
 
 
 def assign_splits(data, train_fraction=0.70, validation_fraction=0.15,
@@ -255,6 +339,9 @@ def main():
         dataset, split_details = assign_splits(features, args.train_fraction,
             args.validation_fraction, args.test_fraction, args.gap_weeks)
     dataset = dataset.merge(articles[ARTICLE_COLUMNS], on="article_id", how="left", validate="many_to_one")
+    dataset, classification_details = add_classification_target(
+        dataset, args.high_demand_quantile)
+    clustering = build_clustering_table(dataset)
     counts = {str(k): int(v) for k, v in dataset["split"].value_counts().items()}
     if args.max_rows is None and any(counts.get(s, 0) == 0 for s in ["train", "validation", "test"]):
         raise ValueError("Alguna partición está vacía. Revisa los cortes temporales.")
@@ -264,13 +351,21 @@ def main():
                "target_definition": "recorded next-week sales; not latent demand or stock availability",
                "evaluation": "weekly rolling origin; current week has ended before prediction",
                "split_by": "target_week", "history_weeks": 12,
-               "split_configuration": split_details}
+               "split_configuration": split_details,
+               "classification_target": classification_details,
+               "clustering_definition": {
+                   "unit": "article",
+                   "source_partition": "train only",
+                   "future_targets_used": False,
+                   "rows": len(clustering),
+               }}
     provenance = metadata(
         {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},
         {"articles": source, "transactions": args.raw_dir / "transactions_train.csv"},
         [Path(__file__), Path(__file__).with_name("data_contract.py")])
     provenance["split_configuration"] = split_details
-    final = publish(args.output_dir, {"article_week": dataset, "articles_clean": articles},
+    final = publish(args.output_dir, {"article_week": dataset, "articles_clean": articles,
+                                     "article_clustering": clustering},
                     {"summary": summary, "provenance": provenance}, args.parquet, args.max_rows is not None)
     print(json.dumps(summary, indent=2))
     print("Ejecución publicada:", final)

@@ -13,7 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 ARTICLE_COLUMNS = [
     "article_id", "product_code", "product_type_name", "product_group_name",
     "graphical_appearance_name", "colour_group_name", "perceived_colour_value_name",

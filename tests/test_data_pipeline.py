@@ -46,6 +46,10 @@ class DemandTests(unittest.TestCase):
         row = data.loc[data.week == "2018-12-31"].iloc[0]
         self.assertEqual((row.iso_year, row.iso_week), (2019, 1))
         self.assertTrue(data.target_next_week_sales.eq(7).all())
+        self.assertTrue(data.rolling_4w_sales_std.eq(0).all())
+        self.assertTrue(data.rolling_12w_active_weeks.eq(12).all())
+        self.assertTrue(data.sales_trend_4w.eq(0).all())
+        self.assertTrue(data.rolling_4w_online_share.eq(1).all())
         self.assertNotIn(pd.Timestamp("2018-09-17"), complete)
 
     def test_absent_article_is_zero_only_in_covered_week(self):
@@ -118,6 +122,38 @@ class PercentageSplitTests(unittest.TestCase):
                 demand.assign_splits(self.make_data([10, 10, 10]), *fractions)
         with self.assertRaises(ValueError):
             demand.assign_splits(self.make_data([10, 10]))
+
+    def test_classification_threshold_uses_train_only(self):
+        data = pd.DataFrame({
+            "split": ["train"] * 5 + ["validation", "test"],
+            "target_next_week_sales": [0, 1, 2, 4, 8, 1_000, 2_000],
+        })
+        result, details = demand.add_classification_target(data, quantile=.5)
+        self.assertEqual(details["threshold_units"], 4)
+        self.assertEqual(result.target_high_demand.tolist(), [0, 0, 0, 1, 1, 1, 1])
+        changed = data.copy()
+        changed.loc[changed.split.ne("train"), "target_next_week_sales"] = 1_000_000
+        _, repeated = demand.add_classification_target(changed, quantile=.5)
+        self.assertEqual(details["threshold_units"], repeated["threshold_units"])
+
+    def test_clustering_table_uses_training_history_without_targets(self):
+        rows = pd.DataFrame({
+            "article_id": ["001", "001", "002", "001"],
+            "week": pd.to_datetime(["2020-01-06", "2020-01-13", "2020-01-06", "2020-02-03"]),
+            "split": ["train", "train", "train", "validation"],
+            "sales": [2, 4, 3, 999], "rolling_12w_sales_mean": [1., 2., 1.5, 999.],
+            "rolling_12w_sales_std": [.5, 1., .75, 999.],
+            "sales_trend_4w": [0., 1., -1., 999.],
+            "rolling_12w_active_weeks": [6, 8, 7, 12],
+            "mean_price": [.1, .2, .3, 99.], "online_sales": [1, 4, 0, 999],
+            "target_next_week_sales": [5, 6, 7, 999], "target_high_demand": [0, 1, 1, 1],
+        })
+        for column in common.ARTICLE_COLUMNS[1:]:
+            rows[column] = "category"
+        clusters = demand.build_clustering_table(rows)
+        self.assertEqual(set(clusters.article_id), {"001", "002"})
+        self.assertEqual(clusters.loc[clusters.article_id.eq("001"), "article_weeks"].iloc[0], 2)
+        self.assertFalse(any(column.startswith("target_") for column in clusters.columns))
 
     def test_optional_gap_keeps_whole_weeks_and_all_rows(self):
         data = self.make_data([10] * 20)
