@@ -36,6 +36,18 @@ Colores semánticos:
 | Dorado | `#E9A23B` |
 | Violeta | `#7357C8` |
 
+Colores fijos para particiones de datos:
+
+| Partición | Color |
+|---|---|
+| `train` | Morado `#6F4EAF` |
+| `validation` | Naranja `#E17C05` |
+| `test` | Cian `#00A6D6` |
+
+- Esta correspondencia es obligatoria en todos los gráficos que comparen o señalen particiones, incluidas líneas, barras, puntos, bandas, fronteras temporales y leyendas.
+- Estos tres colores son exclusivos de las particiones y distinguen conjuntos de datos; no representan rendimiento positivo, negativo o neutral.
+- Si hace falta distinguir otra dimensión dentro de una partición, se conserva su color y se varían el estilo de línea, el marcador, la trama o la transparencia.
+
 Paleta categórica extendida, optimizada para maximizar la distancia perceptual entre colores sobre el fondo del proyecto:
 
 | Orden | Color | Orden | Color |
