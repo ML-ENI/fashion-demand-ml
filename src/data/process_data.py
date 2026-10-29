@@ -100,7 +100,8 @@ def aggregate_transactions(path, articles, chunk_size, max_rows=None,
                 min_price=("price", "min"), max_price=("price", "max"),
                 online_sales=("is_online", "sum")
             ).reset_index())
-            print(f"Bloque {number}: {rows_read:,} transacciones revisadas", flush=True)
+            rows_label = f"{rows_read:,}".replace(",", ".")
+            print(f"Bloque {number}: {rows_label} transacciones revisadas", flush=True)
     if not parts:
         raise ValueError("No hay transacciones en el periodo seleccionado")
     daily = pd.DatetimeIndex(sorted(days))

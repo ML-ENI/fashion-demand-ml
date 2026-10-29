@@ -82,6 +82,9 @@ Paleta categórica extendida, optimizada para maximizar la distancia perceptual 
 - Se incluyen suficientes referencias temporales para interpretar la evolución. Como guía, usar frecuencia trimestral en periodos de 12–24 meses; nunca dejar solo dos o tres fechas si caben más sin solapamiento.
 - Las barras parten de cero. Toda escala logarítmica se declara en el eje.
 - El redondeo refleja la precisión real; se evitan decimales ficticios.
+- Todos los números visibles usan punto como separador de miles y coma como
+  separador decimal (`1.234.567,89`), también en ejes, tablas, anotaciones,
+  leyendas, notas de fuente, porcentajes y salidas de texto.
 
 ## 5. Leyendas y anotaciones
 

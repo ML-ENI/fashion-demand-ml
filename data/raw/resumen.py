@@ -26,7 +26,7 @@ for file in csv_files:
         header = next(reader)
         first_row = next(reader, None)
 
-    print(f"Número de filas: {num_rows:,}")
+    print(f"Número de filas: {num_rows:,}".replace(",", "."))
 
     print("\nCABECERAS:")
     for i, column in enumerate(header):
