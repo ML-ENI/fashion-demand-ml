@@ -191,3 +191,13 @@ def apply_style():
         "figure.facecolor": PAPER, "axes.facecolor": PAPER,
         "savefig.facecolor": PAPER,
     })
+    try:
+        # Each inline chart also carries an SVG copy, so VS Code can save it as .svg.
+        from IPython import get_ipython
+        from matplotlib_inline.config import InlineBackend
+        if get_ipython() is not None:
+            # Stored in the inline-backend config, so the kernel keeps it when it
+            # re-applies its matplotlib setup on the first displayed chart.
+            InlineBackend.instance().figure_formats = {"png", "svg"}
+    except ImportError:
+        pass
