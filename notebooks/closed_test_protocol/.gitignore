@@ -1,0 +1,3 @@
+# Row-level predictions derived from the H&M dataset stay local.
+results/final_test_predictions.csv.gz
+results/07_threshold_nested_*_predictions.csv.gz

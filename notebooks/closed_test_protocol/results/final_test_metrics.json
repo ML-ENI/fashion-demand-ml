@@ -1,0 +1,52 @@
+{
+  "publication_run": "20261027T145552-5a1ac59a",
+  "publication_sha256": "7565450ec43df08610ee05892bbdb9931b27f389880e7677dc365d03af7b01f7",
+  "development_rows": 1597649,
+  "test_rows": 289490,
+  "frozen_decision": {
+    "publication_run": "20261027T145552-5a1ac59a",
+    "publication_sha256": "7565450ec43df08610ee05892bbdb9931b27f389880e7677dc365d03af7b01f7",
+    "regression_candidate": "boosting_absolute_error",
+    "classification_candidate": "logistic_C_1",
+    "probability_threshold": 0.28,
+    "model_rule": "lowest mean inner MAE for regression; highest mean inner AP for classification",
+    "threshold_rule": "highest mean inner F1; ties: mean precision, then higher threshold",
+    "development_rows_sampled": 154000
+  },
+  "regression": {
+    "MAE": 6.647704681979787,
+    "RMSE": 21.90737757172193,
+    "R2": 0.6329712067887893,
+    "negative_raw_prediction_share": 0.009437286262047049
+  },
+  "persistence_baseline": {
+    "MAE": 7.8489412414936615,
+    "RMSE": 24.34022381904405,
+    "R2": 0.5469266850034519,
+    "negative_raw_prediction_share": 0.0
+  },
+  "classification_probability_metrics": {
+    "precision_at_0.5": 0.8649867374005306,
+    "recall_at_0.5": 0.7459682031339357,
+    "F1_at_0.5": 0.8010808819013695,
+    "PR-AUC": 0.8927317079556382,
+    "ROC-AUC": 0.9595131464342507,
+    "Brier": 0.058252694851719924
+  },
+  "classification_at_frozen_threshold": {
+    "precision": 0.7785790961733267,
+    "recall": 0.8414241597359521,
+    "F1": 0.8087826483014245
+  },
+  "current_sales_rule": {
+    "precision_at_0.5": 0.7824256855365236,
+    "recall_at_0.5": 0.8322086240420908,
+    "F1_at_0.5": 0.806549692785203,
+    "PR-AUC": 0.686614131076331,
+    "ROC-AUC": 0.8850844205676685,
+    "Brier": 0.08439669764067843
+  },
+  "predictions_file": "final_test_predictions.csv.gz",
+  "predictions_sha256": "c7ac9b7fdd36b9072afd1ad653e560b2773bb3545de8c20bbc07730d61943918",
+  "high_demand_units_threshold": 16
+}

@@ -1,0 +1,10 @@
+{
+  "publication_run": "20261027T145552-5a1ac59a",
+  "publication_sha256": "7565450ec43df08610ee05892bbdb9931b27f389880e7677dc365d03af7b01f7",
+  "regression_candidate": "boosting_absolute_error",
+  "classification_candidate": "logistic_C_1",
+  "probability_threshold": 0.28,
+  "model_rule": "lowest mean inner MAE for regression; highest mean inner AP for classification",
+  "threshold_rule": "highest mean inner F1; ties: mean precision, then higher threshold",
+  "development_rows_sampled": 154000
+}
