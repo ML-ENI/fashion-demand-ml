@@ -1,0 +1,67 @@
+{
+  "source_notebook": "07_threshold.ipynb",
+  "publication_run": "20261027T145552-5a1ac59a",
+  "source_metrics": "07_threshold_nested_20261027T145552-5a1ac59a.json",
+  "source_predictions": "07_threshold_nested_20261027T145552-5a1ac59a_predictions.csv.gz",
+  "outer_windows": 3,
+  "target_weeks": 12,
+  "paired_article_weeks": 24000,
+  "class_definition_units": 16,
+  "logistic_cutoffs_selected_before_outer_evaluation": [
+    0.34,
+    0.42,
+    0.29
+  ],
+  "bootstrap_unit": "complete target week, stratified within each outer window",
+  "bootstrap_replicates": 10000,
+  "random_seed": 42,
+  "comparison": "logistic inner-selected cutoff minus current-sales rule",
+  "pooled_logistic_f1": 0.7986224050511814,
+  "pooled_rule_f1": 0.8042230042600481,
+  "observed_f1_difference": -0.005600599208866686,
+  "ci_95_lower": -0.014635165857326382,
+  "ci_95_upper": 0.003644974600944928,
+  "contains_zero": true,
+  "weeks_logistic_higher_f1": 5,
+  "weeks_rule_higher_f1": 7,
+  "weeks_tied_f1": 0,
+  "per_window": [
+    {
+      "Window": "Window 1",
+      "Logistic F1": 0.786465737844754,
+      "Rule F1": 0.79,
+      "Difference": -0.003534262155245993
+    },
+    {
+      "Window": "Window 2",
+      "Logistic F1": 0.7839433293978748,
+      "Rule F1": 0.7966759002770083,
+      "Difference": -0.012732570879133487
+    },
+    {
+      "Window": "Window 3",
+      "Logistic F1": 0.8246899661781285,
+      "Rule F1": 0.8260869565217391,
+      "Difference": -0.0013969903436106268
+    }
+  ],
+  "policies": [
+    {
+      "name": "Logistic, inner-selected cutoff",
+      "precision": 0.8163504791707412,
+      "recall": 0.7816479400749063,
+      "f1": 0.7986224050511814,
+      "false_alarms": 939,
+      "missed_high_sales": 1166
+    },
+    {
+      "name": "Current-sales rule",
+      "precision": 0.7955294979846097,
+      "recall": 0.8131086142322097,
+      "f1": 0.8042230042600481,
+      "false_alarms": 1116,
+      "missed_high_sales": 998
+    }
+  ],
+  "interpretation_limit": "Retrospective sensitivity across 12 neighboring outer weeks. Fixed trained models and cutoffs; no refitting in bootstrap. Not independent new-season evidence."
+}

@@ -1,0 +1,38 @@
+{
+  "source_notebook": "06_classification.ipynb",
+  "report_reference": "PRDL Table 6.4 / initial validation classification results",
+  "publication_run": "20261027T145552-5a1ac59a",
+  "validation_rows": 271215,
+  "target_weeks": 15,
+  "first_target_week": "2020-03-02",
+  "last_target_week": "2020-06-08",
+  "class_definition": "next-week recorded sales >= 16",
+  "probability_threshold": 0.5,
+  "bootstrap_unit": "complete target week, paired across all methods",
+  "bootstrap_replicates": 10000,
+  "random_seed": 42,
+  "interval": "percentile 95% of paired week-bootstrap score differences",
+  "interpretation_limit": "retrospective validation-week sensitivity, not untouched-test or new-season inference",
+  "comparisons": [
+    {
+      "comparison": "Decision tree minus Random Forest",
+      "metric": "recall",
+      "first_score": 0.8956654097623413,
+      "second_score": 0.8895942159338569,
+      "difference": 0.0060711938284844225,
+      "ci_95_lower": -0.003104435113878179,
+      "ci_95_upper": 0.015948788628843316,
+      "contains_zero": true
+    },
+    {
+      "comparison": "Current-sales rule minus Logistic regression",
+      "metric": "F1",
+      "first_score": 0.7995445933201356,
+      "second_score": 0.7841204475790298,
+      "difference": 0.015424145741105844,
+      "ci_95_lower": -0.0015187456831681266,
+      "ci_95_upper": 0.0314021347400233,
+      "contains_zero": true
+    }
+  ]
+}

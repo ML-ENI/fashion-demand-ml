@@ -1,0 +1,125 @@
+{
+  "publication_run": "20261027T145552-5a1ac59a",
+  "clustering_file_sha256": "83faf30b032dbbb46ff373914d73410063533af3d46c56bb630a681011527899",
+  "source_partition": "train only",
+  "future_targets_used": false,
+  "unit": "article",
+  "articles": 77357,
+  "numeric_features": [
+    "mean_current_week_sales",
+    "std_current_week_sales",
+    "mean_12w_sales",
+    "mean_12w_sales_volatility",
+    "mean_sales_trend_4w",
+    "historical_active_share",
+    "mean_online_share",
+    "mean_price",
+    "price_std"
+  ],
+  "log1p_features": [
+    "mean_current_week_sales",
+    "std_current_week_sales",
+    "mean_12w_sales",
+    "mean_12w_sales_volatility",
+    "mean_price",
+    "price_std"
+  ],
+  "asinh_features": [
+    "mean_sales_trend_4w"
+  ],
+  "imputation": "per-feature median of training articles",
+  "scaling": "standard score on training articles",
+  "random_seed": 42,
+  "pca_first_two_variance_share": 0.662055573983507,
+  "tsne_sample_articles": 2500,
+  "cluster_comparison_sample_articles": 2000,
+  "cluster_selection_rule": "minimum 2% cluster share enforced",
+  "selected_kmeans_clusters": 3,
+  "selected_kmeans_sample_silhouette": 0.35727727904083156,
+  "best_hierarchical_sample_k": 2,
+  "best_hierarchical_sample_silhouette": 0.252448379024514,
+  "kmeans_seed_ari_min": 0.9822920818328986,
+  "kmeans_seed_ari_median": 0.9848873500423414,
+  "comparison": [
+    {
+      "method": "K-means",
+      "clusters": 2,
+      "silhouette": 0.34497245910143604,
+      "smallest_cluster_share": 0.38,
+      "largest_cluster_share": 0.62,
+      "sample_articles": 2000
+    },
+    {
+      "method": "Hierarchical (Ward)",
+      "clusters": 2,
+      "silhouette": 0.252448379024514,
+      "smallest_cluster_share": 0.3765,
+      "largest_cluster_share": 0.6235,
+      "sample_articles": 2000
+    },
+    {
+      "method": "K-means",
+      "clusters": 3,
+      "silhouette": 0.35727727904083156,
+      "smallest_cluster_share": 0.044,
+      "largest_cluster_share": 0.598,
+      "sample_articles": 2000
+    },
+    {
+      "method": "Hierarchical (Ward)",
+      "clusters": 3,
+      "silhouette": 0.22260026943992473,
+      "smallest_cluster_share": 0.229,
+      "largest_cluster_share": 0.3945,
+      "sample_articles": 2000
+    },
+    {
+      "method": "K-means",
+      "clusters": 4,
+      "silhouette": 0.24514162813744714,
+      "smallest_cluster_share": 0.0385,
+      "largest_cluster_share": 0.3985,
+      "sample_articles": 2000
+    },
+    {
+      "method": "Hierarchical (Ward)",
+      "clusters": 4,
+      "silhouette": 0.23108290989632946,
+      "smallest_cluster_share": 0.032,
+      "largest_cluster_share": 0.3765,
+      "sample_articles": 2000
+    },
+    {
+      "method": "K-means",
+      "clusters": 5,
+      "silhouette": 0.24914761640879018,
+      "smallest_cluster_share": 0.038,
+      "largest_cluster_share": 0.3085,
+      "sample_articles": 2000
+    },
+    {
+      "method": "Hierarchical (Ward)",
+      "clusters": 5,
+      "silhouette": 0.21640904987440918,
+      "smallest_cluster_share": 0.032,
+      "largest_cluster_share": 0.3765,
+      "sample_articles": 2000
+    },
+    {
+      "method": "K-means",
+      "clusters": 6,
+      "silhouette": 0.261880264825833,
+      "smallest_cluster_share": 0.0375,
+      "largest_cluster_share": 0.2865,
+      "sample_articles": 2000
+    },
+    {
+      "method": "Hierarchical (Ward)",
+      "clusters": 6,
+      "silhouette": 0.2196962832578406,
+      "smallest_cluster_share": 0.032,
+      "largest_cluster_share": 0.283,
+      "sample_articles": 2000
+    }
+  ]
+}
