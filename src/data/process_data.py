@@ -14,7 +14,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from data_contract import ARTICLE_COLUMNS, articles_path, load_articles, metadata, publish
+from data_contract import (ARTICLE_COLUMNS, articles_path, load_articles, metadata, publish,
+                           transactions_path)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -327,8 +328,9 @@ def main():
     args = parse_args()
     source = articles_path(ROOT, args.raw_dir, args.articles_path)
     articles = load_articles(source)
+    transactions = transactions_path(args.raw_dir)
     weekly, complete, info = aggregate_transactions(
-        args.raw_dir / "transactions_train.csv", articles, args.chunk_size,
+        transactions, articles, args.chunk_size,
         args.max_rows, args.data_start, args.data_end, args.data_cutoff)
     features = add_temporal_features(weekly, complete)
     # Un diagnóstico muy corto puede no contener tres semanas modelables.
@@ -362,7 +364,7 @@ def main():
                }}
     provenance = metadata(
         {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},
-        {"articles": source, "transactions": args.raw_dir / "transactions_train.csv"},
+        {"articles": source, "transactions": transactions},
         [Path(__file__), Path(__file__).with_name("data_contract.py")])
     provenance["split_configuration"] = split_details
     final = publish(args.output_dir, {"article_week": dataset, "articles_clean": articles,

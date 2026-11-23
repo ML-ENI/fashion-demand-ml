@@ -1,5 +1,6 @@
 # Source datasets are downloaded separately and must not be committed.
 data/raw/*.csv
+data/raw/*.csv.gz
 
 # Generated datasets can be recreated from the pipeline.
 data/processed/
@@ -10,3 +11,5 @@ __pycache__/
 .venv/
 *.antes_revision_*.ipynb
 graphify-out/
+
+explicacion.md

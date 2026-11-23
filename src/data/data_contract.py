@@ -59,6 +59,12 @@ def articles_path(root: Path, raw_dir: Path, explicit: Path | None) -> Path:
     return canonical if canonical.is_file() else raw_dir / "articles.csv"
 
 
+def transactions_path(raw_dir: Path) -> Path:
+    # Se acepta la copia comprimida; pandas infiere gzip por la extensión.
+    compressed = raw_dir / "transactions_train.csv.gz"
+    return compressed if compressed.is_file() else raw_dir / "transactions_train.csv"
+
+
 def metadata(parameters: dict, inputs: dict[str, Path], sources: list[Path]) -> dict:
     packages = {}
     for name in ["pandas", "numpy", "scikit-learn", "Pillow", "pyarrow"]:

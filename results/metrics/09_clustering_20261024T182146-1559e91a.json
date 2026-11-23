@@ -1,0 +1,645 @@
+{
+  "run": "20261024T182146-1559e91a",
+  "population": {
+    "min_active_training_weeks": 4,
+    "articles": 63755,
+    "excluded_articles": 13602
+  },
+  "representation": {
+    "numeric": [
+      "sales_level",
+      "sales_variability",
+      "regularity",
+      "active_lifespan",
+      "relative_trend",
+      "price_level",
+      "price_variability",
+      "online_share"
+    ],
+    "categorical": [
+      "index_group_name",
+      "product_group_name"
+    ],
+    "relative_trend_clip": [
+      -0.4037255782986039,
+      1.4231913841838966
+    ],
+    "peak_ratio_spearman_with_variability": 0.9263891506859638
+  },
+  "pca": {
+    "explained_variance_ratio": [
+      0.2848912816343132,
+      0.16885973969040116,
+      0.11326586271264169,
+      0.08005226717635577,
+      0.06947697280800195,
+      0.0533923534843117,
+      0.0410214628893145,
+      0.03789918217398115,
+      0.030763389504720674,
+      0.02359448614589625,
+      0.0207569895475274,
+      0.019772485549541925,
+      0.014860675065653601,
+      0.011131800921428903,
+      0.008668744450168393,
+      0.006429057985705157,
+      0.005248667425645107,
+      0.004398623322595497,
+      0.0030279320087505564,
+      0.0024880255030453524,
+      0.0,
+      0.0
+    ],
+    "components_for_80_percent": 7
+  },
+  "selection_rule": {
+    "k_range": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "min_segments": 3,
+    "min_stability_ari": 0.9,
+    "selected_k": 4
+  },
+  "kmeans_selection": [
+    {
+      "k": 2,
+      "inertia": 505686.85070354445,
+      "silhouette": 0.19144597022493054,
+      "calinski_harabasz": 16624.283846512273,
+      "davies_bouldin": 1.8868109431327202,
+      "stability_ARI_mean": 0.9949293285699543,
+      "stability_ARI_min": 0.985434163381754,
+      "stability_ARI_max": 0.9984947083183895,
+      "smallest_cluster_share (%)": 45.850521527723316
+    },
+    {
+      "k": 3,
+      "inertia": 456738.1796500296,
+      "silhouette": 0.16190682003368162,
+      "calinski_harabasz": 12618.974922370426,
+      "davies_bouldin": 1.9147347858232966,
+      "stability_ARI_mean": 0.9913475262083804,
+      "stability_ARI_min": 0.9853093001937445,
+      "stability_ARI_max": 0.995700028899893,
+      "smallest_cluster_share (%)": 23.24837267665281
+    },
+    {
+      "k": 4,
+      "inertia": 414890.53440704884,
+      "silhouette": 0.1723365925664356,
+      "calinski_harabasz": 11404.431966837254,
+      "davies_bouldin": 1.7454328375645396,
+      "stability_ARI_mean": 0.9900370335194854,
+      "stability_ARI_min": 0.9801531869090521,
+      "stability_ARI_max": 0.9958303996213621,
+      "smallest_cluster_share (%)": 5.858364049878441
+    },
+    {
+      "k": 5,
+      "inertia": 389201.4868696056,
+      "silhouette": 0.13190426263200736,
+      "calinski_harabasz": 10169.69644314823,
+      "davies_bouldin": 1.901668345179417,
+      "stability_ARI_mean": 0.9787959302736248,
+      "stability_ARI_min": 0.9652021451438576,
+      "stability_ARI_max": 0.9897679692993772,
+      "smallest_cluster_share (%)": 5.588581287742138
+    },
+    {
+      "k": 6,
+      "inertia": 372524.22147197084,
+      "silhouette": 0.12176642579928489,
+      "calinski_harabasz": 9070.625572969595,
+      "davies_bouldin": 1.954799980174828,
+      "stability_ARI_mean": 0.9743266398731191,
+      "stability_ARI_min": 0.9615121761972837,
+      "stability_ARI_max": 0.9841041898437044,
+      "smallest_cluster_share (%)": 5.434867853501686
+    },
+    {
+      "k": 7,
+      "inertia": 359858.8055856377,
+      "silhouette": 0.11701790378918736,
+      "calinski_harabasz": 8198.713786143306,
+      "davies_bouldin": 2.0164852861806755,
+      "stability_ARI_mean": 0.9291756136568606,
+      "stability_ARI_min": 0.8275119209934942,
+      "stability_ARI_max": 0.9758234484693831,
+      "smallest_cluster_share (%)": 5.0458787546074815
+    },
+    {
+      "k": 8,
+      "inertia": 348232.3119656444,
+      "silhouette": 0.11315158221670563,
+      "calinski_harabasz": 7566.041454724626,
+      "davies_bouldin": 2.0283548773251634,
+      "stability_ARI_mean": 0.8551406301863423,
+      "stability_ARI_min": 0.6582658552392311,
+      "stability_ARI_max": 0.9781498177240107,
+      "smallest_cluster_share (%)": 4.813740098815779
+    },
+    {
+      "k": 9,
+      "inertia": 337559.98509244365,
+      "silhouette": 0.11494977186816632,
+      "calinski_harabasz": 7081.402370352951,
+      "davies_bouldin": 2.0031932619686983,
+      "stability_ARI_mean": 0.8732676749678339,
+      "stability_ARI_min": 0.787375915663815,
+      "stability_ARI_max": 0.9803868621545502,
+      "smallest_cluster_share (%)": 4.926672417849581
+    },
+    {
+      "k": 10,
+      "inertia": 328567.7246471039,
+      "silhouette": 0.10881629005027375,
+      "calinski_harabasz": 6660.585574231077,
+      "davies_bouldin": 1.9653219593168187,
+      "stability_ARI_mean": 0.8610170270526242,
+      "stability_ARI_min": 0.576995693244558,
+      "stability_ARI_max": 0.9741097679081001,
+      "smallest_cluster_share (%)": 4.4451415575249
+    }
+  ],
+  "method_comparison": [
+    {
+      "method": "K-Means (k=4)",
+      "clusters": 4,
+      "noise (%)": 0.0,
+      "largest cluster (%)": 41.775,
+      "silhouette": 0.17587755777112313,
+      "ARI vs K-Means": 1.0
+    },
+    {
+      "method": "Ward linkage (k=4)",
+      "clusters": 4,
+      "noise (%)": 0.0,
+      "largest cluster (%)": 38.425,
+      "silhouette": 0.1146508842589618,
+      "ARI vs K-Means": 0.4337545228939352
+    },
+    {
+      "method": "Average linkage (k=4)",
+      "clusters": 4,
+      "noise (%)": 0.0,
+      "largest cluster (%)": 96.25,
+      "silhouette": 0.21795164469357542,
+      "ARI vs K-Means": 0.03959038294256101
+    },
+    {
+      "method": "DBSCAN (eps=P90 = 1,66)",
+      "clusters": 1,
+      "noise (%)": 2.5749999999999997,
+      "largest cluster (%)": 97.425,
+      "silhouette": NaN,
+      "ARI vs K-Means": 0.018378675326653583
+    },
+    {
+      "method": "DBSCAN (eps=P95 = 1,87)",
+      "clusters": 1,
+      "noise (%)": 1.075,
+      "largest cluster (%)": 98.925,
+      "silhouette": NaN,
+      "ARI vs K-Means": 0.00857415661064884
+    },
+    {
+      "method": "DBSCAN (eps=P98 = 2,18)",
+      "clusters": 1,
+      "noise (%)": 0.42500000000000004,
+      "largest cluster (%)": 99.575,
+      "silhouette": NaN,
+      "ARI vs K-Means": 0.0033105844823606303
+    }
+  ],
+  "stability": [
+    {
+      "check": "10 seeds, 1 start each",
+      "mean ARI": 0.6820173832208432,
+      "min ARI": 0.474054731064921
+    },
+    {
+      "check": "5 other seeds, 10 starts each (as used)",
+      "mean ARI": 0.9956753525339543,
+      "min ARI": 0.9890815049336829
+    },
+    {
+      "check": "10 subsamples of 80 %",
+      "mean ARI": 0.9900370335194854,
+      "min ARI": 0.9801531869090521
+    },
+    {
+      "check": "Without product attributes",
+      "mean ARI": 0.8964511361583708,
+      "min ARI": NaN
+    }
+  ],
+  "segment_profiles": [
+    {
+      "segment": "Segment 1",
+      "articles": 19877,
+      "share (%)": 31.177162575484274,
+      "median_weekly_sales": 1.8,
+      "median_peak_week": 4.0,
+      "median_sales_CV": 0.570894035701898,
+      "median_active_share": 0.3416666666666666,
+      "median_active_weeks": 9.0,
+      "median_relative_trend": 0.06798866855524077,
+      "median_price": 0.0225463075060532,
+      "median_price_CV": 0.14675816291671012,
+      "median_online_share": 1.0,
+      "median_weeks_since_first_sale": 53.0,
+      "median_weeks_since_last_sale": 21.0,
+      "top index group": "Baby/Children (55 %)",
+      "top product group": "Garment Upper body (40 %)"
+    },
+    {
+      "segment": "Segment 2",
+      "articles": 13596,
+      "share (%)": 21.32538624421614,
+      "median_weekly_sales": 2.8846153846153846,
+      "median_peak_week": 9.0,
+      "median_sales_CV": 0.7483963193093184,
+      "median_active_share": 0.6123188405797101,
+      "median_active_weeks": 17.0,
+      "median_relative_trend": 0.014805681143535632,
+      "median_price": 0.01325396656286455,
+      "median_price_CV": 0.27584904665486554,
+      "median_online_share": 0.2307692307692307,
+      "median_weeks_since_first_sale": 60.0,
+      "median_weeks_since_last_sale": 12.0,
+      "top index group": "Baby/Children (44 %)",
+      "top product group": "Garment Upper body (42 %)"
+    },
+    {
+      "segment": "Segment 3",
+      "articles": 3735,
+      "share (%)": 5.858364049878441,
+      "median_weekly_sales": 10.714285714285714,
+      "median_peak_week": 21.0,
+      "median_sales_CV": 0.5544827368297204,
+      "median_active_share": 0.2083333333333333,
+      "median_active_weeks": 6.0,
+      "median_relative_trend": 0.9260204081632656,
+      "median_price": 0.028956565815043,
+      "median_price_CV": 0.02874221487762574,
+      "median_online_share": 0.961038961038961,
+      "median_weeks_since_first_sale": 7.0,
+      "median_weeks_since_last_sale": 0.0,
+      "top index group": "Ladieswear (50 %)",
+      "top product group": "Garment Upper body (41 %)"
+    },
+    {
+      "segment": "Segment 4",
+      "articles": 26547,
+      "share (%)": 41.639087130421146,
+      "median_weekly_sales": 10.973684210526317,
+      "median_peak_week": 48.0,
+      "median_sales_CV": 1.0351617414569545,
+      "median_active_share": 0.748062015503876,
+      "median_active_weeks": 29.0,
+      "median_relative_trend": 0.010871882327861859,
+      "median_price": 0.0275316388712788,
+      "median_price_CV": 0.21551645632204863,
+      "median_online_share": 0.9340463458110516,
+      "median_weeks_since_first_sale": 53.0,
+      "median_weeks_since_last_sale": 1.0,
+      "top index group": "Ladieswear (63 %)",
+      "top product group": "Garment Upper body (42 %)"
+    }
+  ],
+  "validation_relevance": [
+    {
+      "group": "Segment 1",
+      "rows": 22229,
+      "articles": 4637,
+      "mean_next_week_sales": 2.986369157406991,
+      "persistence_MAE": 2.5448738134868867,
+      "rows (%)": 8.196080600261785,
+      "high-demand prevalence (%)": 3.2884970084124343,
+      "95 % CI low (%)": 3.0620084288429976,
+      "95 % CI high (%)": 3.5311280958196885,
+      "relative persistence MAE": 0.8521631718486383
+    },
+    {
+      "group": "Segment 2",
+      "rows": 17711,
+      "articles": 4377,
+      "mean_next_week_sales": 4.2741798882050706,
+      "persistence_MAE": 2.8290892665575065,
+      "rows (%)": 6.530243533727854,
+      "high-demand prevalence (%)": 6.476201230873468,
+      "95 % CI low (%)": 6.123099727320785,
+      "95 % CI high (%)": 6.848179677175839,
+      "relative persistence MAE": 0.6619022457067371
+    },
+    {
+      "group": "Segment 3",
+      "rows": 34822,
+      "articles": 2941,
+      "mean_next_week_sales": 23.996640055137558,
+      "persistence_MAE": 11.569151685715926,
+      "rows (%)": 12.83926036539277,
+      "high-demand prevalence (%)": 38.96100166561369,
+      "95 % CI low (%)": 38.45003626510186,
+      "95 % CI high (%)": 39.47440246547572,
+      "relative persistence MAE": 0.48211548196469406
+    },
+    {
+      "group": "Segment 4",
+      "rows": 113720,
+      "articles": 15974,
+      "mean_next_week_sales": 10.978534998241294,
+      "persistence_MAE": 5.9282272247625745,
+      "rows (%)": 41.92983426432904,
+      "high-demand prevalence (%)": 14.672001406964474,
+      "95 % CI low (%)": 14.4675450883826,
+      "95 % CI high (%)": 14.878844490493526,
+      "relative persistence MAE": 0.5399834518642284
+    },
+    {
+      "group": "Excluded (< 4 training weeks)",
+      "rows": 23579,
+      "articles": 3058,
+      "mean_next_week_sales": 15.502735484965436,
+      "persistence_MAE": 7.657449425336104,
+      "rows (%)": 8.693840679903397,
+      "high-demand prevalence (%)": 23.669366809449087,
+      "95 % CI low (%)": 23.131137796569107,
+      "95 % CI high (%)": 24.21617424236687,
+      "relative persistence MAE": 0.49394182289714633
+    },
+    {
+      "group": "No training sale",
+      "rows": 59154,
+      "articles": 9833,
+      "mean_next_week_sales": 24.13657571761842,
+      "persistence_MAE": 14.133870913209588,
+      "rows (%)": 21.810740556385156,
+      "high-demand prevalence (%)": 33.98417689420834,
+      "95 % CI low (%)": 33.60352417162406,
+      "95 % CI high (%)": 34.366909692210484,
+      "relative persistence MAE": 0.5855789602703507
+    }
+  ],
+  "seed": 42,
+  "model_error_by_group": [
+    {
+      "group": "Segment 1",
+      "rows": 22229,
+      "rows (%)": 8.196080600261785,
+      "abs. error (%)": 2.3104854353270543,
+      "mean next-week sales": 2.986369157406991,
+      "model MAE": 2.0528035047450186,
+      "persistence MAE": 2.5448738134868867,
+      "MAE skill (%)": 19.335744905467532,
+      "skill CI low (%)": 18.45377318522458,
+      "skill CI high (%)": 20.43115352836409,
+      "mean bias (units)": -0.5971961542048074,
+      "bias CI low": -0.6486672786734703,
+      "bias CI high": -0.5482665831056162,
+      "high-demand prevalence (%)": 3.288497008412434,
+      "PR-AUC": 0.5068550393827702,
+      "recall at 0,5 (%)": 35.15731874145007,
+      "precision at 0,5 (%)": 67.81002638522428
+    },
+    {
+      "group": "Segment 2",
+      "rows": 17711,
+      "rows (%)": 6.530243533727854,
+      "abs. error (%)": 2.278407603205924,
+      "mean next-week sales": 4.2741798882050706,
+      "model MAE": 2.5406942770542877,
+      "persistence MAE": 2.8290892665575065,
+      "MAE skill (%)": 10.19391621580551,
+      "skill CI low (%)": 9.02705379814246,
+      "skill CI high (%)": 11.36282354572597,
+      "mean bias (units)": -0.5795337317432282,
+      "bias CI low": -0.6689173857853222,
+      "bias CI high": -0.4907883479865846,
+      "high-demand prevalence (%)": 6.476201230873468,
+      "PR-AUC": 0.6787538429148667,
+      "recall at 0,5 (%)": 50.65387968613775,
+      "precision at 0,5 (%)": 76.64907651715039
+    },
+    {
+      "group": "Segment 3",
+      "rows": 34822,
+      "rows (%)": 12.83926036539277,
+      "abs. error (%)": 18.590189436059802,
+      "mean next-week sales": 23.996640055137558,
+      "model MAE": 10.543727551375428,
+      "persistence MAE": 11.569151685715926,
+      "MAE skill (%)": 8.863434089178368,
+      "skill CI low (%)": 7.91623732285029,
+      "skill CI high (%)": 9.855752668692714,
+      "mean bias (units)": -3.303734501440049,
+      "bias CI low": -3.6283317243385866,
+      "bias CI high": -2.9195045221195306,
+      "high-demand prevalence (%)": 38.96100166561369,
+      "PR-AUC": 0.9091271016654401,
+      "recall at 0,5 (%)": 77.11358443281492,
+      "precision at 0,5 (%)": 86.30589011714238
+    },
+    {
+      "group": "Segment 4",
+      "rows": 113720,
+      "rows (%)": 41.92983426432904,
+      "abs. error (%)": 31.339855683525165,
+      "mean next-week sales": 10.978534998241294,
+      "model MAE": 5.442823013304004,
+      "persistence MAE": 5.9282272247625745,
+      "MAE skill (%)": 8.188016299898337,
+      "skill CI low (%)": 6.874860946995061,
+      "skill CI high (%)": 9.45684070192097,
+      "mean bias (units)": -1.968331575500741,
+      "bias CI low": -2.176043196256221,
+      "bias CI high": -1.7635975184004742,
+      "high-demand prevalence (%)": 14.672001406964474,
+      "PR-AUC": 0.8447399978354944,
+      "recall at 0,5 (%)": 67.48576565777644,
+      "precision at 0,5 (%)": 85.23200363333585
+    },
+    {
+      "group": "Excluded (< 4 training weeks)",
+      "rows": 23579,
+      "rows (%)": 8.693840679903397,
+      "abs. error (%)": 8.39429786553609,
+      "mean next-week sales": 15.502735484965436,
+      "model MAE": 7.031096595862703,
+      "persistence MAE": 7.657449425336104,
+      "MAE skill (%)": 8.179653494034122,
+      "skill CI low (%)": 6.176261297400029,
+      "skill CI high (%)": 9.660570636766774,
+      "mean bias (units)": -2.2134206133999768,
+      "bias CI low": -2.7575926205750303,
+      "bias CI high": -1.7347521651864715,
+      "high-demand prevalence (%)": 23.669366809449084,
+      "PR-AUC": 0.8957817473293583,
+      "recall at 0,5 (%)": 75.82870453323777,
+      "precision at 0,5 (%)": 85.23665659617322
+    },
+    {
+      "group": "No training sale",
+      "rows": 59154,
+      "rows (%)": 21.810740556385156,
+      "abs. error (%)": 37.086763976345985,
+      "mean next-week sales": 24.13657571761842,
+      "model MAE": 12.38223079235137,
+      "persistence MAE": 14.133870913209588,
+      "MAE skill (%)": 12.393208708458815,
+      "skill CI low (%)": 11.546082563999734,
+      "skill CI high (%)": 13.263988053096115,
+      "mean bias (units)": -3.5615069499794028,
+      "bias CI low": -3.9970119691364987,
+      "bias CI high": -3.25481954382282,
+      "high-demand prevalence (%)": 33.98417689420834,
+      "PR-AUC": 0.8843873723747908,
+      "recall at 0,5 (%)": 76.34183952643885,
+      "precision at 0,5 (%)": 85.12396694214875
+    }
+  ],
+  "lifecycle": {
+    "weeks": 16,
+    "min_units": 20,
+    "launches": 24545,
+    "representation": "cumulative share of 16-week sales",
+    "selection": [
+      {
+        "k": 2,
+        "silhouette": 0.4542415108828116,
+        "stability_ARI_mean": 0.9974272777569114,
+        "stability_ARI_min": 0.9944660572736732,
+        "smallest_cluster_share (%)": 45.06824200448156
+      },
+      {
+        "k": 3,
+        "silhouette": 0.3916548441147836,
+        "stability_ARI_mean": 0.9872943797744117,
+        "stability_ARI_min": 0.9732299289077392,
+        "smallest_cluster_share (%)": 25.793440619270726
+      },
+      {
+        "k": 4,
+        "silhouette": 0.3423555504614178,
+        "stability_ARI_mean": 0.9931758296017023,
+        "stability_ARI_min": 0.988411483974592,
+        "smallest_cluster_share (%)": 16.84660827052353
+      },
+      {
+        "k": 5,
+        "silhouette": 0.2998674642648632,
+        "stability_ARI_mean": 0.9630355868551499,
+        "stability_ARI_min": 0.9336262062440621,
+        "smallest_cluster_share (%)": 11.647993481360766
+      },
+      {
+        "k": 6,
+        "silhouette": 0.2679217780424391,
+        "stability_ARI_mean": 0.8771206136098157,
+        "stability_ARI_min": 0.7855413472840249,
+        "smallest_cluster_share (%)": 8.176818089223875
+      },
+      {
+        "k": 7,
+        "silhouette": 0.24589305837754147,
+        "stability_ARI_mean": 0.7864100829816777,
+        "stability_ARI_min": 0.4477649921854012,
+        "smallest_cluster_share (%)": 5.3738032185781215
+      },
+      {
+        "k": 8,
+        "silhouette": 0.24495326065850268,
+        "stability_ARI_mean": 0.9026771456287648,
+        "stability_ARI_min": 0.8311499821935818,
+        "smallest_cluster_share (%)": 5.04379710735384
+      },
+      {
+        "k": 9,
+        "silhouette": 0.2359108868403353,
+        "stability_ARI_mean": 0.7962159140782628,
+        "stability_ARI_min": 0.511563021710404,
+        "smallest_cluster_share (%)": 4.542676716235486
+      },
+      {
+        "k": 10,
+        "silhouette": 0.2264589453915643,
+        "stability_ARI_mean": 0.6848859636061622,
+        "stability_ARI_min": 0.4374598103536839,
+        "smallest_cluster_share (%)": 3.748217559584437
+      }
+    ],
+    "selected_k": 3,
+    "archetypes": [
+      "Fast fade",
+      "Mid-life peak",
+      "Slow build"
+    ],
+    "profiles": [
+      {
+        "archetype": "Fast fade",
+        "launches": 6331,
+        "share (%)": 25.793440619270726,
+        "median_units_16_weeks": 124.0,
+        "median_peak_week": 1.0,
+        "median_week_reaching_half": 3.0,
+        "median_share_weeks_0_3": 0.6208791208791209,
+        "median_share_weeks_8_15": 0.11111111111111105,
+        "median_launch_price": 0.0330635593220338,
+        "top index group": "Ladieswear (54 %)",
+        "top product group": "Garment Upper body (38 %)"
+      },
+      {
+        "archetype": "Mid-life peak",
+        "launches": 10828,
+        "share (%)": 44.11489101650031,
+        "median_units_16_weeks": 143.0,
+        "median_peak_week": 4.0,
+        "median_week_reaching_half": 6.0,
+        "median_share_weeks_0_3": 0.3,
+        "median_share_weeks_8_15": 0.36,
+        "median_launch_price": 0.02987429378531065,
+        "top index group": "Ladieswear (48 %)",
+        "top product group": "Garment Upper body (41 %)"
+      },
+      {
+        "archetype": "Slow build",
+        "launches": 7386,
+        "share (%)": 30.091668364228966,
+        "median_units_16_weeks": 174.0,
+        "median_peak_week": 11.0,
+        "median_week_reaching_half": 9.0,
+        "median_share_weeks_0_3": 0.13793103448275862,
+        "median_share_weeks_8_15": 0.625,
+        "median_launch_price": 0.0254067796610169,
+        "top index group": "Ladieswear (44 %)",
+        "top product group": "Garment Upper body (42 %)"
+      }
+    ],
+    "early_detection": [
+      {
+        "information": "Majority archetype (baseline)",
+        "balanced accuracy": 0.3333333333333333,
+        "macro-F1": 0.2020777002988473
+      },
+      {
+        "information": "At launch (attributes, price, season)",
+        "balanced accuracy": 0.39482256507202185,
+        "macro-F1": 0.39340245016574826
+      },
+      {
+        "information": "After two weeks (+ weeks 0\u20131 sales)",
+        "balanced accuracy": 0.5464831079650151,
+        "macro-F1": 0.539715986384034
+      }
+    ]
+  }
+}
