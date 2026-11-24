@@ -184,6 +184,7 @@ def apply_style():
         "figure.constrained_layout.h_pad": 0.1,
         "figure.titlesize": 15, "figure.titleweight": "bold",
         "axes.edgecolor": GRID, "grid.color": GRID, "grid.linewidth": .7,
+        "axes.axisbelow": True,  # grid lines always drawn behind bars, lines, and points
         "axes.spines.top": False, "axes.spines.right": False,
         "xtick.color": MUTED, "ytick.color": MUTED,
         "legend.fontsize": 9, "legend.facecolor": "white",

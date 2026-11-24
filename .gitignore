@@ -14,3 +14,6 @@ graphify-out/
 
 explicacion.md
 .DS_Store
+
+# Notebook cache of slow steps (recomputed automatically).
+results/cache/
