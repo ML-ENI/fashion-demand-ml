@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.data.cache import cached
 from src.evaluation.grouped import (group_metrics, grouped_wape, interval_coverage, paired_mae_change,
                                     rolling_half_widths, static_half_widths)
-from src.models.clustering import select_k
+from src.models.clustering import davies_bouldin_by_k, select_k
 from src.visualization.labels import place_line_labels
 
 
@@ -27,6 +27,9 @@ class SelectKTests(unittest.TestCase):
         self.assertEqual(k, 3)
         self.assertEqual(list(table.index), [2, 3, 4, 5])
         self.assertGreater(table.loc[3, "silhouette"], 0.8)
+        davies_bouldin = davies_bouldin_by_k(matrix, models)
+        self.assertEqual(int(davies_bouldin.idxmin()), 3)
+        self.assertLess(davies_bouldin.loc[3], 0.3)
 
     def test_rule_fails_loudly_when_no_k_is_eligible(self):
         matrix = np.random.default_rng(1).normal(size=(100, 2))

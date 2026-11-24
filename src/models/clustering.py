@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
-from sklearn.metrics import adjusted_rand_score, silhouette_score
+from sklearn.metrics import adjusted_rand_score, davies_bouldin_score, silhouette_score
 
 
 def stability_ari(matrix, k, labels, seed, resamples=10, fraction=0.8, n_init=10):
@@ -45,3 +45,13 @@ def select_k(matrix, k_range, min_clusters, seed, resamples=10, fraction=0.8, mi
     if eligible.empty:
         raise ValueError("No candidate k satisfies the stability rule.")
     return table, models, int(eligible["silhouette"].idxmax())
+
+
+def davies_bouldin_by_k(matrix, models):
+    """Davies–Bouldin index of each fitted model's partition of ``matrix`` (lower = more compact, better separated).
+
+    It averages, over clusters, the worst ratio (spread_i + spread_j) / distance between centroids i and j, so it
+    complements the silhouette with a centroid-based view; it is cheap enough to compute on every row.
+    """
+    return pd.Series({k: davies_bouldin_score(matrix, model.predict(matrix)) for k, model in models.items()},
+                     name="davies-bouldin")

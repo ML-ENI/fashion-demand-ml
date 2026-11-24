@@ -61,7 +61,8 @@
         "stability ARI mean": 0.99763223,
         "stability ARI min": 0.9946776479,
         "stability ARI max": 0.999394585,
-        "smallest cluster (%)": 34.556
+        "smallest cluster (%)": 34.556,
+        "davies-bouldin": 0.9684221414
       },
       {
         "k": 3,
@@ -70,7 +71,8 @@
         "stability ARI mean": 0.9751869477,
         "stability ARI min": 0.9313388162,
         "stability ARI max": 0.9938554864,
-        "smallest cluster (%)": 28.374
+        "smallest cluster (%)": 28.374,
+        "davies-bouldin": 1.2329020578
       },
       {
         "k": 4,
@@ -79,7 +81,8 @@
         "stability ARI mean": 0.9290485535,
         "stability ARI min": 0.8953921855,
         "stability ARI max": 0.950876396,
-        "smallest cluster (%)": 20.496
+        "smallest cluster (%)": 20.496,
+        "davies-bouldin": 1.1541244791
       },
       {
         "k": 5,
@@ -88,7 +91,8 @@
         "stability ARI mean": 0.6892470327,
         "stability ARI min": 0.5059624311,
         "stability ARI max": 0.9774479725,
-        "smallest cluster (%)": 15.188
+        "smallest cluster (%)": 15.188,
+        "davies-bouldin": 1.1709629016
       },
       {
         "k": 6,
@@ -97,7 +101,8 @@
         "stability ARI mean": 0.9573122064,
         "stability ARI min": 0.8651302686,
         "stability ARI max": 0.9925235786,
-        "smallest cluster (%)": 12.009
+        "smallest cluster (%)": 12.009,
+        "davies-bouldin": 1.0900276245
       },
       {
         "k": 7,
@@ -106,7 +111,8 @@
         "stability ARI mean": 0.9811172631,
         "stability ARI min": 0.9698399571,
         "stability ARI max": 0.988173259,
-        "smallest cluster (%)": 8.71
+        "smallest cluster (%)": 8.71,
+        "davies-bouldin": 1.0499952986
       },
       {
         "k": 8,
@@ -115,7 +121,8 @@
         "stability ARI mean": 0.9541526491,
         "stability ARI min": 0.8109488763,
         "stability ARI max": 0.9940527223,
-        "smallest cluster (%)": 7.688
+        "smallest cluster (%)": 7.688,
+        "davies-bouldin": 1.1033746513
       }
     ],
     "state_names": [
